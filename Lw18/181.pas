@@ -1,6 +1,6 @@
 PROGRAM AverageScore(INPUT, OUTPUT);
 CONST
-  NumberOfScores = 4;
+  NumberOfScores = 4;                               
   ClassSize = 4;
 TYPE
   Score = 0 .. 100;
@@ -20,12 +20,19 @@ BEGIN {AverageScore}
       TotalScore := 0;
       WhichScore := 0;      
       WRITELN('Enter grades of ', Student, ' student.');
-      WHILE (WhichScore < 4) AND (NOT(EOLN)) 
+      WHILE (WhichScore < 4) 
       DO                                                                                
-        BEGIN              
-          READ(NextScore);
-          TotalScore := TotalScore + NextScore;
-          WhichScore := WhichScore + 1
+        BEGIN
+          NextScore := 0;
+          IF NOT(EOLN)
+          THEN    
+            BEGIN                                                     
+              READ(NextScore);
+              WhichScore := WhichScore + 1 
+            END
+          ELSE
+            READLN; 
+          TotalScore := TotalScore + NextScore
         END;
       READLN;
       TotalScore := TotalScore * 10;
