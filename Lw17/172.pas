@@ -1,9 +1,7 @@
 PROGRAM TestReadNumber(INPUT, OUTPUT);
 VAR
   Number: INTEGER;
-PROCEDURE ReadNumber(VAR InF: TEXT; VAR N: INTEGER);
-{Преобразует строку цифр из файла до первого нецифрового
- символа,  в соответствующее целое число N}
+PROCEDURE ReadNumber(VAR InF: TEXT; VAR N: INTEGER); 
 VAR
   Ch: CHAR;
   D, Error: INTEGER; 

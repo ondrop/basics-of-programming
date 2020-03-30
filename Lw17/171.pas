@@ -2,9 +2,6 @@ PROGRAM TestReadDigit(INPUT, OUTPUT);
 VAR
   Digit, Sum: INTEGER;
 PROCEDURE ReadDigit(VAR InF: TEXT; VAR D: INTEGER);
-{Считывает текущий символ из файла, если он - цифра, возвращает его 
- преобразуя в значение типа INTEGER. Если считанный символ не цифра
- возвращает -1}
 VAR
   Ch: CHAR;
   Error: INTEGER; 
@@ -15,8 +12,6 @@ BEGIN {ReadDigit}
       READ(InF, Ch);
       IF (Ch >= '0') AND (Ch <= '9')
       THEN
-        {Процедура Val, преобразовывает строковое значение 
-         в его числовое представление}
         Val(Ch, D, Error)
       ELSE
         D := -1 
