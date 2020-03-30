@@ -8,7 +8,8 @@ VAR
   WhichScore: 0 .. NumberOfScores;
   Student: 0 .. ClassSize;
   NextScore: Score;
-  Ave, TotalScore, ClassTotal: INTEGER;
+  Ave, TotalScore, ClassTotal, Error: INTEGER;
+  Ch: CHAR;
 BEGIN {AverageScore}
   ClassTotal := 0;
   WRITELN('Student averages:');
@@ -27,8 +28,13 @@ BEGIN {AverageScore}
           IF NOT(EOLN)
           THEN    
             BEGIN                                                     
-              READ(NextScore);
-              WhichScore := WhichScore + 1 
+              READ(Ch);
+              IF (Ch >= '0') AND (Ch <= '9')
+              THEN
+                BEGIN
+                  Val(Ch, NextScore, Error);
+                  WhichScore := WhichScore + 1 
+                END
             END
           ELSE
             READLN; 
