@@ -2,8 +2,6 @@ PROGRAM Stat(INPUT, OUTPUT);
 VAR
   Average, Num, NumMax, NumMin, Counter, State: INTEGER;
 PROCEDURE ReadNumber(VAR InF: TEXT; VAR N, State: INTEGER);
-{Преобразует строку цифр из файла до первого нецифрового
- символа,  в соответствующее целое число N}
 VAR
   Ch: CHAR;
   D, Error: INTEGER; 
