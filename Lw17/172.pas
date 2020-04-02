@@ -27,7 +27,7 @@ BEGIN {ReadNumber}
       THEN
         BEGIN
           N := N * 10;
-          IF (D <= (MAXINT - N))
+          IF (D <= (32767 - N))
           THEN
             N := N + D
           ELSE
