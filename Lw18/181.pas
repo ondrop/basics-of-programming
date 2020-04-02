@@ -21,7 +21,7 @@ BEGIN {AverageScore}
       TotalScore := 0;
       WhichScore := 0;      
       WRITELN('Enter grades of ', Student, ' student.');
-      WHILE (WhichScore < 4) 
+      WHILE (WhichScore < NumberOfScores) 
       DO                                                                                
         BEGIN
           NextScore := 0;
@@ -51,7 +51,6 @@ BEGIN {AverageScore}
         WRITELN(Ave DIV 10);
       ClassTotal := ClassTotal + TotalScore
     END;
-  WRITELN;
   WRITELN('Class average:');
   ClassTotal := ClassTotal DIV (ClassSize * NumberOfScores);
   WRITELN(ClassTotal DIV 10, '.', ClassTotal MOD 10:1)
