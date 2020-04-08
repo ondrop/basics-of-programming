@@ -25,20 +25,9 @@ BEGIN {AverageScore}
       DO                                                                                
         BEGIN
           NextScore := 0;
-          IF NOT(EOLN)
-          THEN    
-            BEGIN                                                     
-              READ(Ch);
-              IF (Ch >= '0') AND (Ch <= '9')
-              THEN
-                BEGIN
-                  Val(Ch, NextScore, Error);
-                  WhichScore := WhichScore + 1 
-                END
-            END
-          ELSE
-            READLN; 
-          TotalScore := TotalScore + NextScore
+          Read(NextScore);
+          TotalScore := TotalScore + NextScore;
+          WhichScore := WhichScore + 1
         END;
       READLN;
       TotalScore := TotalScore * 10;
