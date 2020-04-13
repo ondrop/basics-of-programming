@@ -6,13 +6,13 @@ VAR
   Ch: CHAR;
 BEGIN {Prime}
   Number := 0;
-  WRITELN(OUTPUT, 'Введите минимальное число.');
+  WRITELN(OUTPUT, 'Р’РІРµРґРёС‚Рµ РјРёРЅРёРјР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ.');
   IF NOT(EOLN(INPUT))
   THEN
     READ(INPUT, Number);
   Min := Number;  
   READLN(INPUT);  
-  WRITELN(OUTPUT, 'Введите максимальное число.');
+  WRITELN(OUTPUT, 'Р’РІРµРґРёС‚Рµ РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ.');
   IF NOT(EOLN(INPUT))
   THEN
     READ(INPUT, Number);
@@ -44,7 +44,7 @@ BEGIN {Prime}
       TotalNumber := NextNumber
     END;         
   RESET(PrimeFile);
-  WRITE(OUTPUT, 'Простые числа в диапазоне до ', Max, ' будут ');
+  WRITE(OUTPUT, 'РџСЂРѕСЃС‚С‹Рµ С‡РёСЃР»Р° РІ РґРёР°РїР°Р·РѕРЅРµ РґРѕ ', Max, ' Р±СѓРґСѓС‚ ');
   WHILE NOT(EOF(PrimeFile))
   DO
     BEGIN
