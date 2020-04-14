@@ -35,7 +35,7 @@ BEGIN {ReadNumber}
       ReadDigit(InF, D);
       IF (D <> -1)
       THEN
-        IF (N <= 3276) AND (D <= 7)
+        IF ((N * 10) + D) <= MAXINT 
         THEN
           N := N * 10 + D
         ELSE

@@ -38,7 +38,7 @@ BEGIN {ReadNumber}
       ReadDigit(InF, D);
       IF (D <> -1) AND (D <> -2)
       THEN
-        IF (N <= 3276) AND (D <= 7)
+        IF ((N * 10) + D) <= MAXINT
         THEN
           N := N * 10 + D
         ELSE
@@ -105,11 +105,10 @@ BEGIN {Stat}
   DO
     BEGIN
       ReadNumber(FileForStat, Num);
-      IF (Num <> -1) AND (Num <> -2) AND ((32767 - Average) >= Num)
+      IF (Num <> -1) AND (Num <> -2) AND ((MAXINT - Average) >= Num)
       THEN
         BEGIN
           Counter := Counter + 1;
-          WRITELN(OUTPUT, 'TEST ', Counter);
           Average := Average + Num;
           IF (NumMax <= Num) OR (NumMax = -1)
           THEN
