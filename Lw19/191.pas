@@ -1,27 +1,19 @@
 PROGRAM Prime(INPUT, OUTPUT);
+CONST
+  Min = 2;
+  Max = 100;
 VAR
-  Sieve: SET OF 0 .. MAXINT;
-  NextNumber, TotalNumber, Number, Min, Max: INTEGER;
+  Sieve: SET OF Min .. Max;
+  NextNumber, TotalNumber, Number: INTEGER;
   PrimeFile: TEXT;
   Ch: CHAR;
-BEGIN {Prime}
-  Number := 0;
-  WRITELN(OUTPUT, 'Введите минимальное число.');
-  IF NOT(EOLN(INPUT))
-  THEN
-    READ(INPUT, Number);
-  Min := Number;  
-  READLN(INPUT);  
-  WRITELN(OUTPUT, 'Введите максимальное число.');
-  IF NOT(EOLN(INPUT))
-  THEN
-    READ(INPUT, Number);
-  Max := Number;   
+BEGIN {Prime}    
+  Number := Min;      
   Sieve := [Min .. Max];
   REWRITE(PrimeFile);   
   NextNumber := Min;
   TotalNumber := Min;
-  WHILE (Min <= Max)
+  WHILE (Number <= Max)
   DO
     BEGIN                       
       WHILE (TotalNumber <= Max) 
@@ -39,7 +31,7 @@ BEGIN {Prime}
       DO
         BEGIN
           NextNumber := NextNumber + 1;              
-          Min := Min + 1
+          Number := Number + 1
         END;                    
       TotalNumber := NextNumber
     END;         
