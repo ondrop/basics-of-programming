@@ -1,11 +1,13 @@
 PROGRAM TestReadNumber(INPUT, OUTPUT);
+CONST
+  NegOne = -1;
 VAR
   Number: INTEGER;
 PROCEDURE ReadDigit(VAR InF: TEXT; VAR D: INTEGER);
 VAR
   Ch: CHAR;
 BEGIN {ReadDigit}
-  D := -1;
+  D := NegOne;
   IF NOT(EOLN(InF))
   THEN
     BEGIN
@@ -28,17 +30,17 @@ VAR
 BEGIN {ReadNumber}
   N := 0;
   D := 0;
-  WHILE (NOT(EOLN(InF))) AND (D <> -1) AND (N <> -1)
+  WHILE (NOT(EOLN(InF))) AND (D <> NegOne) AND (N <> NegOne)
   DO
     BEGIN
       ReadDigit(InF, D);
-      IF (D <> -1)
+      IF (D <> NegOne)
       THEN
         IF ((N * 10) + D) <= MAXINT 
         THEN
           N := N * 10 + D
         ELSE
-          N := -1
+          N := NegOne
     END
 END; {ReadNumber}
 BEGIN {TestReadNumber}

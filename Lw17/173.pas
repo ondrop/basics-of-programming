@@ -3,7 +3,8 @@ CONST
   NegOne = -1;
   NegTwo = -2;
 VAR
-  Average, Num, NumMax, NumMin, Counter, Overflow, InvalidData: INTEGER;
+  Overflow, InvalidData: BOOLEAN;
+  Average, Num, NumMax, NumMin, Counter: INTEGER;
 PROCEDURE ReadDigit(VAR InF: TEXT; VAR D: INTEGER);
 VAR
   Ch: CHAR;
@@ -55,9 +56,9 @@ BEGIN {Stat}
   NumMin := NegOne;
   Counter := 0;
   Average := 0;
-  Overflow := 0;
-  InvalidData := 0;    
-  WHILE (NOT(EOLN(INPUT))) AND (Overflow = 0) AND (InvalidData = 0) AND (Num <> NegTwo)
+  Overflow := FALSE;
+  InvalidData := FALSE;    
+  WHILE (NOT(EOLN(INPUT))) AND NOT(Overflow) AND NOT(InvalidData) AND (Num <> NegTwo)
   DO
     BEGIN
       ReadNumber(INPUT, Num);
@@ -76,11 +77,11 @@ BEGIN {Stat}
       ELSE    
         IF (Num = NegTwo) 
         THEN 
-          InvalidData := 1
+          InvalidData := TRUE
         ELSE 
-         Overflow := 1
+         Overflow := TRUE
     END;     
-  IF (Counter <> 0) AND (Overflow = 0) AND (InvalidData = 0)
+  IF (Counter <> 0) AND NOT(Overflow) AND NOT(InvalidData)
   THEN
     BEGIN
       WRITELN(OUTPUT, 'Maximum number = ', NumMax);  
@@ -88,7 +89,7 @@ BEGIN {Stat}
       WRITELN(OUTPUT, 'Average score = ', Average DIV Counter, '.', (Average MOD Counter) * 100 DIV Counter)
     END
   ELSE
-    IF Overflow = 1
+    IF Overflow
     THEN
       WRITELN(OUTPUT, 'Overflow')
     ELSE
