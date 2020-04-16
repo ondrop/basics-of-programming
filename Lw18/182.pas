@@ -2,13 +2,15 @@ PROGRAM AverageScore(INPUT, OUTPUT);
 CONST
   NumberOfScores = 4;                               
   ClassSize = 4; 
+  MinNumber = 0;
+  MaxNumber = 0;
 TYPE
-  Score = 0 .. 100;
+  Score = MinNumber .. MaxNumber;
 VAR
-  WhichScore: 0 .. NumberOfScores;
-  Student: 0 .. ClassSize;
+  WhichScore: MinNumber .. NumberOfScores;
+  Student: MinNumber .. ClassSize;
   NextScore: Score;
-  Ave, TotalScore, ClassTotal, Number: INTEGER;
+  Ave, TotalScore, ClassTotal: INTEGER;
   IsCorrectData, IsOverFlow: BOOLEAN;
   LastName: TEXT;
   Ch: CHAR;
@@ -25,17 +27,17 @@ BEGIN {Copy}
   WRITELN(OutF)
 END; {Copy}  
 BEGIN {AverageScore}
-  ClassTotal := 0;
+  ClassTotal := MinNumber;
   WRITELN(OUTPUT, 'Student averages:');
-  Student := 0;
+  Student := MinNumber;
   IsCorrectData := TRUE;
   IsOverFlow := FALSE;              
   WHILE (Student < ClassSize) AND (IsCorrectData) AND (NOT(IsOverFlow))
   DO                                                                         
     BEGIN                    
       Student := Student + 1;
-      TotalScore := 0;
-      WhichScore := 0;
+      TotalScore := MinNumber;
+      WhichScore := MinNumber;
       Ch := ' ';
       IsCorrectData := TRUE;
       WRITELN(OUTPUT, 'Enter last name of ', Student, ' student.');
@@ -73,9 +75,9 @@ BEGIN {AverageScore}
           WHILE (WhichScore < NumberOfScores) AND (NOT(IsOverFlow)) AND (IsCorrectData)
           DO                                                                                
             BEGIN
-              NextScore := 0;
+              NextScore := MinNumber;
               Read(INPUT, NextScore);
-              IF (NextScore >= 0) AND (NextScore <= 100)
+              IF (NextScore >= MinNumber) AND (NextScore <= MaxNumber)
               THEN
                 BEGIN
                   TotalScore := TotalScore + NextScore;
