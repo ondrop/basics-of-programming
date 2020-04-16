@@ -3,7 +3,7 @@ CONST
   NumberOfScores = 4;                               
   ClassSize = 4; 
   MinNumber = 0;
-  MaxNumber = 0;
+  MaxNumber = 100;
 TYPE
   Score = MinNumber .. MaxNumber;
 VAR
