@@ -1,13 +1,14 @@
 PROGRAM Stat(INPUT, OUTPUT);
+CONST
+  NegOne = -1;
+  NegTwo = -2;
 VAR
-  FileForStat: TEXT;
-  Ch: CHAR;
   Average, Num, NumMax, NumMin, Counter, Overflow, InvalidData: INTEGER;
 PROCEDURE ReadDigit(VAR InF: TEXT; VAR D: INTEGER);
 VAR
   Ch: CHAR;
 BEGIN {ReadDigit}
-  D := -1;
+  D := NegOne;
   IF NOT(EOLN(InF))
   THEN
     BEGIN
@@ -22,103 +23,58 @@ BEGIN {ReadDigit}
       IF (Ch = '7') THEN D := 7 ELSE
       IF (Ch = '8') THEN D := 8 ELSE
       IF (Ch = '9') THEN D := 9 ELSE
-      IF (Ch = ' ') THEN D := -2
+      IF (Ch = ' ') THEN D := NegTwo
     END
 END; {ReadDigit}
 PROCEDURE ReadNumber(VAR InF: TEXT; VAR N: INTEGER);
 VAR
-  Ch: CHAR;
   D: INTEGER;
 BEGIN {ReadNumber}
   N := 0;
   D := 0;
-  WHILE (NOT(EOLN(InF))) AND (D <> -1) AND (D <> -2) AND (N <> -1)
+  WHILE (NOT(EOLN(InF))) AND (D <> NegOne) AND (D <> NegTwo) AND (N <> NegOne)
   DO
     BEGIN
       ReadDigit(InF, D);
-      IF (D <> -1) AND (D <> -2)
+      IF (D <> NegOne) AND (D <> NegTwo)
       THEN
         IF ((N * 10) + D) <= MAXINT
         THEN
           N := N * 10 + D
         ELSE
-          N := -1
+          N := NegOne
       ELSE
-        IF D <> -2 
+        IF D <> NegTwo 
         THEN
-          N := -2   
+          N := NegTwo   
     END
 END; {ReadNumber}
-PROCEDURE Copy(VAR InF, OutF: TEXT);
-VAR
-  Ch: CHAR;
-BEGIN {Copy}
-  WHILE NOT(EOLN(InF))
-  DO
-    BEGIN
-      READ(InF, Ch);
-      WRITE(OutF, Ch)
-    END;
-  WRITELN(OutF)
-END; {Copy} 
-PROCEDURE CheckSpace(VAR InF: TEXT; VAR N: INTEGER);
-VAR
-  Ch, W1, W2: CHAR;
-BEGIN {DelSpace}
-  RESET(InF);
-  W1 := '0';
-  W2 := '0';
-  IF NOT(EOLN(InF))
-  THEN
-    BEGIN
-      READ(InF, Ch);  
-      IF Ch = ' '
-      THEN
-        N := -2
-      ELSE
-        RESET(InF);
-      WHILE ((W1 <> ' ') OR (W2 <> ' ')) AND (NOT(EOLN(InF)))
-      DO
-        BEGIN         
-          W1 := W2;
-          READ(InF, W2)
-        END;
-      IF (W1 = ' ') AND (W2 = ' ')
-      THEN
-        N := -2
-      ELSE      
-        RESET(InF)          
-    END;  
-END; {DelSpace}
 BEGIN {Stat}
   Num := 0;
-  NumMax := -1;
-  NumMin := -1;
+  NumMax := NegOne;
+  NumMin := NegOne;
   Counter := 0;
   Average := 0;
   Overflow := 0;
   InvalidData := 0;    
-  REWRITE(FileForStat);
-  Copy(INPUT, FileForStat);
-  CheckSpace(FileForStat, Num);
-  WHILE (NOT(EOLN(FileForStat))) AND (Overflow = 0) AND (InvalidData = 0) AND (Num <> -2)
+  WHILE (NOT(EOLN(INPUT))) AND (Overflow = 0) AND (InvalidData = 0) AND (Num <> NegTwo)
   DO
     BEGIN
-      ReadNumber(FileForStat, Num);
-      IF (Num <> -1) AND (Num <> -2) AND ((MAXINT - Average) >= Num)
+      ReadNumber(INPUT, Num);
+      IF (Num <> NegOne) AND (Num <> NegTwo) AND ((MAXINT - Average) >= Num)
       THEN
         BEGIN
           Counter := Counter + 1;
           Average := Average + Num;
-          IF (NumMax <= Num) OR (NumMax = -1)
+          IF (NumMax <= Num) OR (NumMax = NegOne)
           THEN
             NumMax := Num; 
-          IF (NumMin >= Num) OR (NumMin = -1)
+          IF (NumMin >= Num) OR (NumMin = NegOne)
           THEN
             NumMin := Num
         END
       ELSE    
-        IF (Num = -2) 
+        IF (Num = NegTwo) 
         THEN 
           InvalidData := 1
         ELSE 

@@ -24,7 +24,6 @@ BEGIN {ReadDigit}
 END; {ReadDigit}
 PROCEDURE ReadNumber(VAR InF: TEXT; VAR N: INTEGER);
 VAR
-  Ch: CHAR;
   D: INTEGER;
 BEGIN {ReadNumber}
   N := 0;
