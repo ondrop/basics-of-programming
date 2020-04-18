@@ -25,5 +25,5 @@ BEGIN {Prime}
         NextNumber := NextNumber + 1;
       TotalNumber := NextNumber
     END;         
-  WRITELN(OUTPUT)     
+  WRITELN     
 END. {Prime}                        
