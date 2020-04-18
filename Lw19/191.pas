@@ -5,12 +5,11 @@ CONST
 VAR
   Sieve: SET OF Min .. Max;
   NextNumber, TotalNumber: INTEGER;
-  Ch: CHAR;
 BEGIN {Prime}    
   Sieve := [Min .. Max];   
   NextNumber := Min;
   TotalNumber := Min;
-  WRITE(OUTPUT, 'Простые числа в диапазоне до ', Max, ' будут ');
+  WRITE('Простые числа в диапазоне до ', Max, ' будут ');
   WHILE (NextNumber <= Max)
   DO
     BEGIN                       
@@ -18,7 +17,7 @@ BEGIN {Prime}
       DO
         BEGIN
           Sieve := Sieve - [TotalNumber];
-          TotalNumber := TotalNumber + NextNumber;                
+          TotalNumber := TotalNumber + NextNumber               
         END;    
       WRITE(NextNumber, ' ');    
       WHILE (NOT(NextNumber IN Sieve)) AND (NextNumber <= Max)  
