@@ -4,50 +4,27 @@ CONST
   Max = 100;
 VAR
   Sieve: SET OF Min .. Max;
-  NextNumber, TotalNumber, Number: INTEGER;
-  PrimeFile: TEXT;
+  NextNumber, TotalNumber: INTEGER;
   Ch: CHAR;
 BEGIN {Prime}    
-  Number := Min;      
-  Sieve := [Min .. Max];
-  REWRITE(PrimeFile);   
+  Sieve := [Min .. Max];   
   NextNumber := Min;
   TotalNumber := Min;
-  WHILE (Number <= Max)
+  WRITE(OUTPUT, 'Простые числа в диапазоне до ', Max, ' будут ');
+  WHILE (NextNumber <= Max)
   DO
     BEGIN                       
       WHILE (TotalNumber <= Max) 
       DO
-        BEGIN    
-          IF (TotalNumber MOD NextNumber) = 0
-          THEN
-            BEGIN
-              Sieve := Sieve - [TotalNumber]
-            END;
-          TotalNumber := TotalNumber + 1                
+        BEGIN
+          Sieve := Sieve - [TotalNumber];
+          TotalNumber := TotalNumber + NextNumber;                
         END;    
-      WRITELN(PrimeFile, NextNumber);    
+      WRITE(NextNumber, ' ');    
       WHILE (NOT(NextNumber IN Sieve)) AND (NextNumber <= Max)  
       DO
-        BEGIN
-          NextNumber := NextNumber + 1;              
-          Number := Number + 1
-        END;                    
+        NextNumber := NextNumber + 1;
       TotalNumber := NextNumber
     END;         
-  RESET(PrimeFile);
-  WRITE(OUTPUT, 'Простые числа в диапазоне до ', Max, ' будут ');
-  WHILE NOT(EOF(PrimeFile))
-  DO
-    BEGIN
-      WHILE NOT(EOLN(PrimeFile))
-      DO
-        BEGIN
-          READ(PrimeFile, Ch);
-          WRITE(OUTPUT, Ch)
-        END;
-      WRITE(OUTPUT, ' ');  
-      READLN(PrimeFile)  
-    END;
   WRITELN(OUTPUT)     
 END. {Prime}                        
