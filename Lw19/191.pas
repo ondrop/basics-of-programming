@@ -10,17 +10,17 @@ BEGIN {Prime}
   NextNumber := Min;
   TotalNumber := Min;
   WRITE('Простые числа в диапазоне до ', Max, ' будут ');
-  WHILE (NextNumber <= Max)
+  WHILE NextNumber <= Max
   DO
     BEGIN                       
-      WHILE (TotalNumber <= Max) 
+      WHILE TotalNumber <= Max 
       DO
         BEGIN
           Sieve := Sieve - [TotalNumber];
           TotalNumber := TotalNumber + NextNumber               
         END;    
       WRITE(NextNumber, ' ');    
-      WHILE (NOT(NextNumber IN Sieve)) AND (NextNumber <= Max)  
+      WHILE NOT(NextNumber IN Sieve) AND (NextNumber <= Max)  
       DO
         NextNumber := NextNumber + 1;
       TotalNumber := NextNumber
