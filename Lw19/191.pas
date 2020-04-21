@@ -26,4 +26,4 @@ BEGIN {Prime}
       TotalNumber := NextNumber
     END;         
   WRITELN     
-END. {Prime}                        
+END. {Prime}
