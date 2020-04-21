@@ -28,6 +28,7 @@ BEGIN {SortDate}
         BEGIN
           {копируем элементы меньшие, чем D из DateFile в TFile}
           REWRITE(TFile);
+          RESET(DateFile);
           Copying := TRUE;
           WHILE NOT EOF(DateFile) AND Copying
           DO
@@ -36,11 +37,14 @@ BEGIN {SortDate}
               IF Less(VarDate, D)
               THEN
                 WRITE(TFile, VarDate)
-              ELSE
-                Copying := FALSE  
+              ELSE       
+                Copying := FALSE    
             END;
           {копируем D в TFile}
           WRITE(TFile, D);
+          IF Copying = FALSE
+          THEN
+            WRITE(TFile, VarDate); 
           {копируем остаток DateFile в TFile}
           WHILE NOT EOF(DateFile)
           DO
@@ -48,6 +52,8 @@ BEGIN {SortDate}
               READ(DateFile, VarDate);
               WRITE(TFile, VarDate)
             END;
+          RESET(TFile);
+          REWRITE(DateFile);  
           {копируем TFile в DateFile}
           WHILE NOT EOF(TFile)
           DO  
