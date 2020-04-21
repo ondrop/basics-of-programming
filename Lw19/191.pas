@@ -26,4 +26,8 @@ BEGIN {Prime}
       TotalNumber := NextNumber
     END;         
   WRITELN     
+<<<<<<< HEAD
 END. {Prime}                
+=======
+END. {Prime}
+>>>>>>> c5808f3803bd6e561c26886914003b448ee03de7
