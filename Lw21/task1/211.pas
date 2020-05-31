@@ -2,15 +2,15 @@ PROGRAM Encryption(INPUT, OUTPUT);
 {Переводит символы из INPUT в код согласно Chiper 
   и печатает новые символы в OUTPUT}
 CONST
-  Len = 20;
-TYPE
-  Str = ARRAY [1 .. Len] OF 'A' .. 'Z';
-  Chiper = ARRAY ['A' .. 'Z'] OF CHAR;
-VAR
+  Len = 20;                   
+TYPE            
+  Str = ARRAY [1 .. Len] OF CHAR;
+  Chiper = ARRAY [' ' .. 'Z'] OF CHAR;
+VAR       
   Msg: Str;
   Code: Chiper;
   I: INTEGER;
-  StrLength: 1 .. Len;
+  StrLength: 1 .. Len; 
  
 PROCEDURE Initialize(VAR Code: Chiper);
 {Присвоить Code шифр замены}
@@ -40,25 +40,24 @@ BEGIN {Initialize}
   Code['W'] := 'T';
   Code['X'] := 'C';
   Code['Y'] := 'B';
-  Code['Z'] := 'A'
+  Code['Z'] := 'A';
+  Code[' '] := '/'
 END;  {Initialize}
  
 PROCEDURE Encode(VAR S: Str);
 {Выводит символы из Code, соответствующие символам из S}
 VAR
   Index: 1 .. Len;
+  Sieve: SET OF CHAR;
 BEGIN {Encode}
+  Sieve := ['A' .. 'Z', ' '];
   FOR Index := 1 TO StrLength
   DO
-    IF S[Index] IN ['A' .. 'Z']
+    IF S[Index] IN Sieve
     THEN
       WRITE(Code[S[Index]])
     ELSE
-      IF S[Index] = ' '
-      THEN
-        WRITE('%/')
-      ELSE
-        WRITE(S[Index]);
+      WRITE(S[Index]);
   WRITELN
 END;  {Encode}
  
